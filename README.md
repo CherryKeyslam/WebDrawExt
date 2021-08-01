@@ -1,5 +1,3 @@
-# WebDrawExt-Incomplete-
+# WebDrawExt
 
-This is for my own convenience but thought I might share it.
-
-# (It's under construction.)
+Version 1 out! Now it's kiiiiinda useable
