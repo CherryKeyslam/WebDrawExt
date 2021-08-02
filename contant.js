@@ -55,7 +55,7 @@ function draw(e){
 }
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
-		if (request.message == "change mode")
+		if (request.message == "change mode") {
 			if(mode == false) {
 				mode = true;
 				canvasEl.style.pointerEvents = "auto";
@@ -64,6 +64,13 @@ chrome.runtime.onMessage.addListener(
 				mode = false;
 				canvasEl.style.pointerEvents = "none";
 			}
-			sendResponse({respondance: "Sure sure."});
+		}
+		else if(request.message == "clearTheCanvas") {
+			art_piece.clearRect(0, 0, canvasEl.width, canvasEl.height);
+		}
+		else {
+			art_piece.strokeStyle = request.message;	
+		}
+		sendResponse({respondance: "Sure sure."});
 	}
 );
