@@ -18,7 +18,7 @@ Version 3 out! It's pretty much what I hoped for!
 
 By now you have finished the setting up of the extension, here's how to use it:
 
-# How to use it.
+# How to use it:
 
 - Go to any webpage (It won't work in chrome://extensions).
 
