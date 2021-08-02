@@ -1,7 +1,7 @@
 {
   "name": "WebDraw",
   "description": "A fun tool which lets you draw on the web!",
-  "version": "2.0",
+  "version": "3.0",
   "manifest_version": 3,
   "content_scripts": [
     {
