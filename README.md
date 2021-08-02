@@ -2,7 +2,7 @@
 
 Version 3 out! It's pretty much what I hoped for!
 
-#How to set it up:
+# How to set it up:
 
 - Download all the files except this README in a single folder. (Make sure there is nothing else.)
 
