@@ -1,0 +1,17 @@
+{
+  "name": "WebDraw",
+  "description": "A fun tool which lets you draw on the web!",
+  "version": "2.0",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contant.js"]
+    }
+  ],
+  "action": {
+      "default_icon" : "paint.png",
+      "default_popup" : "colours.html",
+      "default_title": "Change colours and toggle drawing mode."
+  }
+}
