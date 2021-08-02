@@ -6,6 +6,7 @@ canvasEl.style.top = 0;
 canvasEl.style.left = 0;
 var art_piece = canvasEl.getContext("2d");
 
+canvasEl.style.pointerEvents = "none";
 canvasEl.width = document.body.clientWidth;
 canvasEl.height = 0;
 
@@ -14,12 +15,13 @@ canvasEl.height = 0;
 	art_piece.lineWidth = 20;
 	art_piece.lineCap = "round";
 	art_piece.strokeStyle = "#ff0000";
- }, 2000);
+ }, 1500);
 
 var bounds = canvasEl.getBoundingClientRect();
 var difY = bounds.y + window.scrollY;
 var difX = bounds.x;
 
+var mode = false;
 var clicking = false;
 var previousX = 0;
 var previousY = 0;
@@ -51,3 +53,17 @@ function draw(e){
 	previousX = e.clientX - difX;
 	previousY = (window.scrollY + e.clientY) - difY;
 }
+chrome.runtime.onMessage.addListener(
+	function(request, sender, sendResponse) {
+		if (request.message == "change mode")
+			if(mode == false) {
+				mode = true;
+				canvasEl.style.pointerEvents = "auto";
+			}
+			else if(mode == true) {
+				mode = false;
+				canvasEl.style.pointerEvents = "none";
+			}
+			sendResponse({respondance: "Sure sure."});
+	}
+);
