@@ -4,21 +4,18 @@ canvasEl.style.background = "rgba(255, 255, 255, 0)";
 canvasEl.style.position = "absolute";
 canvasEl.style.top = 0;
 canvasEl.style.left = 0;
-
 var art_piece = canvasEl.getContext("2d");
 
 canvasEl.width = document.body.clientWidth;
-canvasEl.height = 100;
+canvasEl.height = 0;
 
-function sleep (time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
-sleep(1500).then(() => {
+ setTimeout(function(){ 
 	canvasEl.height = document.body.scrollHeight;
 	art_piece.lineWidth = 20;
 	art_piece.lineCap = "round";
 	art_piece.strokeStyle = "#ff0000";
-});
+ }, 2000);
+
 var bounds = canvasEl.getBoundingClientRect();
 var difY = bounds.y + window.scrollY;
 var difX = bounds.x;
