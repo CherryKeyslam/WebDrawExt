@@ -5,21 +5,27 @@ canvasEl.style.position = "absolute";
 canvasEl.style.top = 0;
 canvasEl.style.left = 0;
 
+var art_piece = canvasEl.getContext("2d");
+
 canvasEl.width = document.body.clientWidth;
-var bounds = canvasEl.getBoundingClientRect()
+canvasEl.height = 100;
+
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+sleep(1500).then(() => {
+	canvasEl.height = document.body.scrollHeight;
+	art_piece.lineWidth = 20;
+	art_piece.lineCap = "round";
+	art_piece.strokeStyle = "#ff0000";
+});
+var bounds = canvasEl.getBoundingClientRect();
 var difY = bounds.y + window.scrollY;
 var difX = bounds.x;
-canvasEl.height = document.body.scrollHeight - difY;
-
-var art_piece = canvasEl.getContext("2d");
 
 var clicking = false;
 var previousX = 0;
 var previousY = 0;
-
-art_piece.lineWidth = 20;
-art_piece.lineCap = "round";
-art_piece.strokeStyle = "#ff0000";
 
 canvasEl.addEventListener("mousemove", function(e) {
 	if(clicking == true)
