@@ -1,3 +1,5 @@
+setupDaStuff();
+
 document.getElementById('modeToggle').addEventListener('click',modeChange);
 document.getElementById('clearCanvas').addEventListener('click',clearCanvas);
 
@@ -28,10 +30,18 @@ function colourSend(hexCode) {
   		});
 	});
 }
-function clearCanvas(hexCode) {
+function clearCanvas() {
 	console.log("Clearing Canvas.");
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 		chrome.tabs.sendMessage(tabs[0].id, {message: "clearTheCanvas"}, function() {
+			console.log("Success");
+  		});
+	});
+}
+
+function setupDaStuff() {
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		chrome.tabs.sendMessage(tabs[0].id, {message: "setupDaStuff"}, function() {
 			console.log("Success");
   		});
 	});
