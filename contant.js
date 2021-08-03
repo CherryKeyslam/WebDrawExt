@@ -71,6 +71,9 @@ chrome.runtime.onMessage.addListener(
 				setup = true;
 			}
 		}
+		else if(request.message.endsWith(" change_brush_size")) {
+			art_piece.lineWidth = parseInt(request.message.split(" change_brush_size")[0]);
+		}
 		else if (request.message == "change mode") {
 			if(mode == false) {
 				mode = true;
