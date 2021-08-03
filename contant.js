@@ -1,10 +1,19 @@
-var canvasEl = document.createElement('CANVAS'); 
+var setup = false;
+var mode = false;
+
+var canvasEl;
+var art_piece;
+
+function readyUp() {
+canvasEl = document.createElement('CANVAS'); 
+
 document.body.appendChild(canvasEl);
 canvasEl.style.background = "rgba(255, 255, 255, 0)";
 canvasEl.style.position = "absolute";
 canvasEl.style.top = 0;
 canvasEl.style.left = 0;
-var art_piece = canvasEl.getContext("2d");
+
+art_piece = canvasEl.getContext("2d");
 
 canvasEl.style.pointerEvents = "none";
 canvasEl.width = document.body.clientWidth;
@@ -21,7 +30,6 @@ var bounds = canvasEl.getBoundingClientRect();
 var difY = bounds.y + window.scrollY;
 var difX = bounds.x;
 
-var mode = false;
 var clicking = false;
 var previousX = 0;
 var previousY = 0;
@@ -52,10 +60,18 @@ function draw(e){
 	art_piece.stroke();	
 	previousX = e.clientX - difX;
 	previousY = (window.scrollY + e.clientY) - difY;
+}	
 }
+
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
-		if (request.message == "change mode") {
+		if(request.message == "setupDaStuff") {
+			if(setup == false) {
+				readyUp();
+				setup = true;
+			}
+		}
+		else if (request.message == "change mode") {
 			if(mode == false) {
 				mode = true;
 				canvasEl.style.pointerEvents = "auto";
