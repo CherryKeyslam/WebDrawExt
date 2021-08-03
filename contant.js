@@ -21,9 +21,9 @@ canvasEl.height = 0;
 
  setTimeout(function(){ 
 	canvasEl.height = document.body.scrollHeight;
-	art_piece.lineWidth = 20;
+	art_piece.lineWidth = 1;
 	art_piece.lineCap = "round";
-	art_piece.strokeStyle = "#ff0000";
+	art_piece.strokeStyle = "#000000";
  }, 1500);
 
 var bounds = canvasEl.getBoundingClientRect();
@@ -70,9 +70,14 @@ chrome.runtime.onMessage.addListener(
 				readyUp();
 				setup = true;
 			}
+			sendResponse({respondance: "Sure sure."});
+		}
+		else if(request.message == "gimme info") {
+			sendResponse({bmessage: [art_piece.strokeStyle,art_piece.lineWidth]});
 		}
 		else if(request.message.endsWith(" change_brush_size")) {
 			art_piece.lineWidth = parseInt(request.message.split(" change_brush_size")[0]);
+			sendResponse({respondance: "Sure sure."});
 		}
 		else if (request.message == "change mode") {
 			if(mode == false) {
@@ -83,13 +88,15 @@ chrome.runtime.onMessage.addListener(
 				mode = false;
 				canvasEl.style.pointerEvents = "none";
 			}
+			sendResponse({respondance: "Sure sure."});
 		}
 		else if(request.message == "clearTheCanvas") {
 			art_piece.clearRect(0, 0, canvasEl.width, canvasEl.height);
+			sendResponse({respondance: "Sure sure."});
 		}
 		else {
 			art_piece.strokeStyle = request.message;	
+			sendResponse({respondance: "Sure sure."});
 		}
-		sendResponse({respondance: "Sure sure."});
 	}
 );
