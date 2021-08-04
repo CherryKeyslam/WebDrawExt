@@ -94,6 +94,14 @@ chrome.runtime.onMessage.addListener(
 			art_piece.clearRect(0, 0, canvasEl.width, canvasEl.height);
 			sendResponse({respondance: "Sure sure."});
 		}
+		else if(request.message == "toggle eraser") {
+			if(art_piece.globalCompositeOperation == "source-over") {
+				art_piece.globalCompositeOperation = "destination-out";
+			}
+			else {
+				art_piece.globalCompositeOperation = "source-over";
+			}
+		}
 		else {
 			art_piece.strokeStyle = request.message;	
 			sendResponse({respondance: "Sure sure."});
