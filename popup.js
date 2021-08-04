@@ -6,6 +6,8 @@ document.getElementById('modeToggle').addEventListener('click',modeChange);
 
 document.getElementById('clearCanvas').addEventListener('click',clearCanvas);
 
+document.getElementById('eraserToggle').addEventListener('click',eraserToggle);
+
 document.getElementById('multicolour').addEventListener('change',function() {
 	colourSend(document.getElementById('multicolour').value);
 });
@@ -82,4 +84,11 @@ function requestInfo() {
 			slDisplay.innerHTML = response.bmessage[1].toString();
   		});
 	});
+}
+function eraserToggle() {
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		chrome.tabs.sendMessage(tabs[0].id, {message: "toggle eraser"}, function() {
+			console.log("Success");
+  		});
+	});	
 }
