@@ -8,14 +8,22 @@ document.getElementById('clearCanvas').addEventListener('click',clearCanvas);
 
 document.getElementById('eraserToggle').addEventListener('click',eraserToggle);
 
-document.getElementById('multicolour').addEventListener('change',function() {
-	colourSend(document.getElementById('multicolour').value);
-});
+var waitColour;
+document.getElementById('multicolour').oninput = function() {
+	try {
+		clearTimeout(waitColour);	
+	} 
+	catch{}
+	waitColour = setTimeout(function() {
+		colourSend(document.getElementById('multicolour').value);
+	},200);
+};
 
 var slider = document.getElementById('sl');
 var slDisplay = document.getElementById('brushSize');
 var brshTimer;
-slider.oninput = brushSizeChange;
+slider.oninput = function() {slDisplay.innerHTML = slider.value; };
+slider.addEventListener('change',brushSizeMessage);
 
 document.getElementById('red').addEventListener('click',function() { colourSend("#fc0324"); });
 document.getElementById('yellow').addEventListener('click',function() { colourSend("#fcf403"); });
@@ -60,14 +68,6 @@ function setupDaStuff() {
 			console.log("Success");
   		});
 	});
-}
-function brushSizeChange() {
-	try {
-		clearTimeout(brshTimer);
-	}
-	catch { }
-	slDisplay.innerHTML = slider.value;
-	brshTimer = setTimeout(brushSizeMessage, 500);
 }
 function brushSizeMessage() {
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
