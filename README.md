@@ -32,7 +32,7 @@ By now you have finished the setting up of the extension, here's how to use it:
 
 - Draw on the webpage by holding down left/right click!
 
-- Pick a colour from the 10 boxes or the wide box below for a custom colour. (Default is red.)
+- Pick a colour from the 10 boxes or the wide box below for a custom colour. (Default is black.)
 
 - Change the slider to format the thickness of the line.
 
