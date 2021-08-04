@@ -17,14 +17,11 @@ art_piece = canvasEl.getContext("2d");
 
 canvasEl.style.pointerEvents = "none";
 canvasEl.width = document.body.clientWidth;
-canvasEl.height = 0;
+canvasEl.height = document.body.scrollHeight;
 
- setTimeout(function(){ 
-	canvasEl.height = document.body.scrollHeight;
-	art_piece.lineWidth = 1;
-	art_piece.lineCap = "round";
-	art_piece.strokeStyle = "#000000";
- }, 1500);
+art_piece.lineWidth = 1;
+art_piece.lineCap = "round";
+art_piece.strokeStyle = "#000000";
 
 var bounds = canvasEl.getBoundingClientRect();
 var difY = bounds.y + window.scrollY;
