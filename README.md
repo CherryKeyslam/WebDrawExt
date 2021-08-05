@@ -39,3 +39,6 @@ By now you have finished the setting up of the extension, here's how to use it:
 - To clear the canvas, click "Clear".
 
 Still, don't look at the code... It's a big bodge.
+
+![Screenshot (9)](https://user-images.githubusercontent.com/85491783/128298709-69c80cb8-3a83-4584-92a1-60006b22a8be.png)
+
