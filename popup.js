@@ -37,6 +37,7 @@ document.getElementById('black').addEventListener('click',function() { colourSen
 document.getElementById('gray').addEventListener('click',function() { colourSend("#756c6c"); });
 
 function modeChange() {
+	toggleDisplay(document.getElementById('modeToggle'));
 	console.log("Changing Mode.");
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 		chrome.tabs.sendMessage(tabs[0].id, {message: "change mode"}, function() {
@@ -82,13 +83,40 @@ function requestInfo() {
 			document.getElementById('multicolour').value = response.bmessage[0];
 			slider.value = response.bmessage[1];
 			slDisplay.innerHTML = response.bmessage[1].toString();
+			let modeE = document.getElementById('modeToggle');
+			let eraserE = document.getElementById('eraserToggle');
+			if(response.bmessage[2] == true) {
+				modeE.style.backgroundColor = "rgba(0, 255, 0, 0.5)";
+			}
+			else {
+				modeE.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+			}
+			if(response.bmessage[3] == true) {
+				eraserE.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+			}
+			else {
+				eraserE.style.backgroundColor = "rgba(0, 255, 0, 0.5)";
+			}
   		});
 	});
 }
 function eraserToggle() {
+	toggleDisplay(document.getElementById('eraserToggle'));
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 		chrome.tabs.sendMessage(tabs[0].id, {message: "toggle eraser"}, function() {
 			console.log("Success");
   		});
 	});	
+}
+
+function toggleDisplay(elem) {
+	if(elem.style.backgroundColor == "rgba(255, 0, 0, 0.5)") {
+		elem.style.backgroundColor = "rgba(0, 255, 0, 0.5)";
+	}
+	else if(elem.style.backgroundColor == "rgba(0, 255, 0, 0.5)"){
+		elem.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+	}
+	else {
+		elem.style.backgroundColor = "rgba(0, 255, 0, 0.5)";
+	}
 }
