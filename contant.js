@@ -70,7 +70,7 @@ chrome.runtime.onMessage.addListener(
 			sendResponse({respondance: "Sure sure."});
 		}
 		else if(request.message == "gimme info") {
-			sendResponse({bmessage: [art_piece.strokeStyle,art_piece.lineWidth]});
+			sendResponse({bmessage: [art_piece.strokeStyle,art_piece.lineWidth,mode,art_piece.globalCompositeOperation == "source-over"]});
 		}
 		else if(request.message.endsWith(" change_brush_size")) {
 			art_piece.lineWidth = parseInt(request.message.split(" change_brush_size")[0]);
