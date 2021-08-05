@@ -42,4 +42,4 @@ Still, don't look at the code... It's a big bodge.
 
 ![Screenshot (9)](https://user-images.githubusercontent.com/85491783/128298709-69c80cb8-3a83-4584-92a1-60006b22a8be.png)
 
-(For firefox users, just edit the manifest.json and change the "manifest_version" to 2 and it'll work!)
+*(For firefox users, just edit the manifest.json and change the value of "manifest_version" to 2 and the label "action" to "browser_action". Everything except the choosing of the custom colour won't work)*
