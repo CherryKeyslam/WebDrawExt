@@ -8,6 +8,8 @@ document.getElementById('clearCanvas').addEventListener('click',clearCanvas);
 
 document.getElementById('eraserToggle').addEventListener('click',eraserToggle);
 
+document.getElementById('refresh').addEventListener('click',refresh);
+
 var waitColour;
 document.getElementById('multicolour').oninput = function() {
 	try {
@@ -119,4 +121,16 @@ function toggleDisplay(elem) {
 	else {
 		elem.style.backgroundColor = "rgba(0, 255, 0, 0.5)";
 	}
+}
+
+function refresh() {
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		chrome.tabs.sendMessage(tabs[0].id, {message: "Refresh"}, function() {
+			console.log("Success");
+  		});
+	});
+	slider.value = 1;
+	slDisplay.innerHTML = "1";
+	document.getElementById('multicolour').value = "#000000";
+	document.getElementById('eraserToggle').backgroundColor = "rgba(255, 0, 0, 0.5)";
 }
