@@ -4,14 +4,22 @@ var mode = false;
 var canvasEl;
 var art_piece;
 
+var mEventMove;
+var mEventDown;
+var mEventUp;
+var mEventLeave;
+
 function readyUp() {
 canvasEl = document.createElement('CANVAS'); 
 
+document.body.style.position = "relative";
 document.body.appendChild(canvasEl);
 canvasEl.style.background = "rgba(255, 255, 255, 0)";
 canvasEl.style.position = "absolute";
 canvasEl.style.top = 0;
 canvasEl.style.left = 0;
+//some crazy number
+canvasEl.style.zIndex = "1000000";
 
 art_piece = canvasEl.getContext("2d");
 
@@ -31,24 +39,31 @@ var clicking = false;
 var previousX = 0;
 var previousY = 0;
 
-canvasEl.addEventListener("mousemove", function(e) {
+mEventMove = function(e) {
 	if(clicking == true)
 	{
 		draw(e);
 	}
-})
-canvasEl.addEventListener("mousedown", function(e) {
+}
+canvasEl.addEventListener("mousemove", mEventMove);
+
+mEventDown = function(e) {
 	previousX = e.clientX - difX;
 	previousY = (window.scrollY + e.clientY) - difY;
 	draw(e);
 	clicking = true;
-})
-canvasEl.addEventListener("mouseup", function(e) {
+}
+canvasEl.addEventListener("mousedown", mEventDown);
+
+mEventUp = function() {
 	clicking = false;
-})
-canvasEl.addEventListener("mouseleave", function(e) {
+}
+canvasEl.addEventListener("mouseup", mEventUp);
+
+mEventLeave = function() {
 	clicking = false;
-})
+}
+canvasEl.addEventListener("mouseleave", mEventLeave);
 
 function draw(e){
 	art_piece.beginPath();
@@ -76,6 +91,23 @@ chrome.runtime.onMessage.addListener(
 			art_piece.lineWidth = parseInt(request.message.split(" change_brush_size")[0]);
 			sendResponse({respondance: "Sure sure."});
 		}
+		else if (request.message == "Refresh") {
+			canvasEl.remove();
+			canvasEl.removeEventListener("mousemove",mEventMove);
+			canvasEl.removeEventListener("mousedown",mEventDown);
+			canvasEl.removeEventListener("mouseup",mEventUp);
+			canvasEl.removeEventListener("mouseleave",mEventLeave);
+			readyUp();
+			if(mode == true) {
+				canvasEl.style.pointerEvents = "auto";
+				console.log("1");
+			}
+			else{
+				canvasEl.style.pointerEvents = "none";
+				console.log("2");
+			}
+			sendResponse({respondance: "Sure sure."});
+		}
 		else if (request.message == "change mode") {
 			if(mode == false) {
 				mode = true;
@@ -98,6 +130,7 @@ chrome.runtime.onMessage.addListener(
 			else {
 				art_piece.globalCompositeOperation = "source-over";
 			}
+			sendResponse({respondance: "Sure sure."});
 		}
 		else {
 			art_piece.strokeStyle = request.message;	
