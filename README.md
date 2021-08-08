@@ -42,6 +42,8 @@ By now you have finished the setting up of the extension, here's how to use it:
 
 Still, don't look at the code... It's a big bodge.
 
+
+*V4*
 ![Screenshot (5)](https://user-images.githubusercontent.com/85491783/128598881-2942f7df-4e8a-472f-8080-9780fb727131.png)
 
 *(For firefox users, just edit the manifest.json and change the value of "manifest_version" to 2 and the label "action" to "browser_action". Everything except the choosing of the custom colour won't work)*
