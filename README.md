@@ -38,6 +38,8 @@ By now you have finished the setting up of the extension, here's how to use it:
 
 - To clear the canvas, click "Clear".
 
+- Click "Refresh" (After clicking "More") if facing any problems.
+
 Still, don't look at the code... It's a big bodge.
 
 ![Screenshot (5)](https://user-images.githubusercontent.com/85491783/128598881-2942f7df-4e8a-472f-8080-9780fb727131.png)
