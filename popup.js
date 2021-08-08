@@ -2,13 +2,27 @@ setupDaStuff();
 requestInfo();
 
 
-document.getElementById('modeToggle').addEventListener('click',modeChange);
+document.getElementById('modeToggle').addEventListener('click', function() {
+	toggleDisplay(document.getElementById('modeToggle'));
+	sendInfo("change mode");
+});
 
-document.getElementById('clearCanvas').addEventListener('click',clearCanvas);
+document.getElementById('clearCanvas').addEventListener('click',function() {
+	sendInfo("clearTheCanvas");
+});
 
-document.getElementById('eraserToggle').addEventListener('click',eraserToggle);
+document.getElementById('eraserToggle').addEventListener('click', function() {
+	toggleDisplay(document.getElementById('eraserToggle'));
+	sendInfo("toggle eraser");
+});
 
-document.getElementById('refresh').addEventListener('click',refresh);
+document.getElementById('refresh').addEventListener('click',function() {
+	sendInfo("Refresh");
+	slider.value = 1;
+	slDisplay.innerHTML = "1";
+	document.getElementById('multicolour').value = "#000000";
+	document.getElementById('eraserToggle').backgroundColor = "rgba(255, 0, 0, 0.5)";
+});
 
 var waitColour;
 document.getElementById('multicolour').oninput = function() {
@@ -23,9 +37,10 @@ document.getElementById('multicolour').oninput = function() {
 
 var slider = document.getElementById('sl');
 var slDisplay = document.getElementById('brushSize');
-var brshTimer;
 slider.oninput = function() {slDisplay.innerHTML = slider.value; };
-slider.addEventListener('change',brushSizeMessage);
+slider.addEventListener('change',function() {
+	sendInfo(slider.value + " change_brush_size");
+});
 
 document.getElementById('red').addEventListener('click',function() { colourSend("#fc0324"); });
 document.getElementById('yellow').addEventListener('click',function() { colourSend("#fcf403"); });
@@ -38,31 +53,9 @@ document.getElementById('indigo').addEventListener('click',function() { colourSe
 document.getElementById('black').addEventListener('click',function() { colourSend("#000000"); });
 document.getElementById('gray').addEventListener('click',function() { colourSend("#756c6c"); });
 
-function modeChange() {
-	toggleDisplay(document.getElementById('modeToggle'));
-	console.log("Changing Mode.");
-	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-		chrome.tabs.sendMessage(tabs[0].id, {message: "change mode"}, function() {
-			console.log("Success");
-  		});
-	});
-}
-function colourSend(hexCode) {
-	document.getElementById('multicolour').value = hexCode;
-	console.log("Changing Colour.");
-	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-		chrome.tabs.sendMessage(tabs[0].id, {message: hexCode}, function() {
-			console.log("Success");
-  		});
-	});
-}
-function clearCanvas() {
-	console.log("Clearing Canvas.");
-	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-		chrome.tabs.sendMessage(tabs[0].id, {message: "clearTheCanvas"}, function() {
-			console.log("Success");
-  		});
-	});
+function colourSend(hex) {
+	document.getElementById('multicolour').value = hex;
+	sendInfo(hex);
 }
 
 function setupDaStuff() {
@@ -72,13 +65,7 @@ function setupDaStuff() {
   		});
 	});
 }
-function brushSizeMessage() {
-	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-		chrome.tabs.sendMessage(tabs[0].id, {message: slider.value + " change_brush_size"}, function() {
-			console.log("Success");
-  		});
-	});
-}
+
 function requestInfo() {
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 		chrome.tabs.sendMessage(tabs[0].id, {message: "gimme info"}, function(response) {
@@ -102,14 +89,6 @@ function requestInfo() {
   		});
 	});
 }
-function eraserToggle() {
-	toggleDisplay(document.getElementById('eraserToggle'));
-	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-		chrome.tabs.sendMessage(tabs[0].id, {message: "toggle eraser"}, function() {
-			console.log("Success");
-  		});
-	});	
-}
 
 function toggleDisplay(elem) {
 	if(elem.style.backgroundColor == "rgba(255, 0, 0, 0.5)") {
@@ -122,15 +101,10 @@ function toggleDisplay(elem) {
 		elem.style.backgroundColor = "rgba(0, 255, 0, 0.5)";
 	}
 }
-
-function refresh() {
+function sendInfo(inf) {
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-		chrome.tabs.sendMessage(tabs[0].id, {message: "Refresh"}, function() {
+		chrome.tabs.sendMessage(tabs[0].id, {message: inf}, function() {
 			console.log("Success");
   		});
 	});
-	slider.value = 1;
-	slDisplay.innerHTML = "1";
-	document.getElementById('multicolour').value = "#000000";
-	document.getElementById('eraserToggle').backgroundColor = "rgba(255, 0, 0, 0.5)";
 }
