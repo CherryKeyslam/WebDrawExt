@@ -24,6 +24,11 @@ document.getElementById('refresh').addEventListener('click',function() {
 	document.getElementById('eraserToggle').backgroundColor = "rgba(255, 0, 0, 0.5)";
 });
 
+document.getElementById('MORE').addEventListener('click',function() {
+	document.getElementById('MORE').style.display = "none";
+	document.getElementById('collapsible').style.display = "block";
+});
+
 var waitColour;
 document.getElementById('multicolour').oninput = function() {
 	try {
