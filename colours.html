@@ -53,9 +53,20 @@ body{
 #eraserToggle {
 	background-color: rgba(255, 0, 0, 0.5);
 }
+#MORE {
+	margin-top: 20px;
+	border: none;
+	cursor: pointer;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+#collapsible {
+	display: none;
+}
 #refresh {
 	width: 100%;
-	margin-top: 5px;
+	margin-top: 20px;
 }
 </style>
 
@@ -89,7 +100,14 @@ body{
 
 <button id="eraserToggle">Toggle between eraser mode.</button>
 
+<button id="MORE">More...</button>
+
+<div id="collapsible">
+
 <button id="refresh">Refresh</button>
+
+
+</div>
 
 <script src="popup.js" type="text/javascript"></script>
 
