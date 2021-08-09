@@ -1,6 +1,6 @@
 # WebDrawExt
 
-Version 4 out! It's pretty much what I hoped for!
+A (chrome) extension to draw live on any website!
 
 # How to set it up:
 
