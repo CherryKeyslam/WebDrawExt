@@ -1,4 +1,4 @@
-setupDaStuff();
+sendInfo("setupDaStuff");
 requestInfo();
 
 
@@ -61,14 +61,6 @@ document.getElementById('gray').addEventListener('click',function() { colourSend
 function colourSend(hex) {
 	document.getElementById('multicolour').value = hex;
 	sendInfo(hex);
-}
-
-function setupDaStuff() {
-	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-		chrome.tabs.sendMessage(tabs[0].id, {message: "setupDaStuff"}, function() {
-			console.log("Success");
-  		});
-	});
 }
 
 function requestInfo() {
