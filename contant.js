@@ -12,9 +12,9 @@ var mEventLeave;
 function readyUp() {
 canvasEl = document.createElement('CANVAS'); 
 
-if(document.body.style.height != "0px") {
-	document.body.style.position = "relative";
-}
+
+document.body.style.position = "relative";
+
 document.body.appendChild(canvasEl);
 canvasEl.style.background = "rgba(255, 255, 255, 0)";
 canvasEl.style.position = "absolute";
@@ -27,7 +27,7 @@ art_piece = canvasEl.getContext("2d");
 
 canvasEl.style.pointerEvents = "none";
 canvasEl.width = document.body.clientWidth;
-canvasEl.height = (document.style.height == "0px") ? window.innerHeight : document.body.scrollHeight;
+canvasEl.height = document.body.scrollHeight;
 
 art_piece.lineWidth = 1;
 art_piece.lineCap = "round";
