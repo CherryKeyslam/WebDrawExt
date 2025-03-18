@@ -12,7 +12,9 @@ var mEventLeave;
 function readyUp() {
 canvasEl = document.createElement('CANVAS'); 
 
-document.body.style.position = "relative";
+if(document.body.style.height != "0px") {
+	document.body.style.position = "relative";
+}
 document.body.appendChild(canvasEl);
 canvasEl.style.background = "rgba(255, 255, 255, 0)";
 canvasEl.style.position = "absolute";
